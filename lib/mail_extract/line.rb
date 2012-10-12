@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module MailExtract
   class Line
     attr_reader :body, :type, :subtype
@@ -40,7 +42,8 @@ module MailExtract
     
     def detect_type(line)
       # Detects the start line of quote text
-      if line.strip =~ /^On\s/i && line =~ /at [\d:]+/ || line.strip =~ />? wrote:\z/
+      if (line.strip =~ /^On\s/i && line =~ /at [\d:]+/ || line.strip =~ />? wrote:\z/) or 
+         (line.strip =~ /^Le\s/i && line =~ /[\d:]+,/ || line.strip =~ />? a écrit:\z/)
         @type    = :quote
         @subtype = :start
         return
