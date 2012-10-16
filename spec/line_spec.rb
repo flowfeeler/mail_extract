@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe 'MailExtract::Line' do
@@ -10,6 +12,8 @@ describe 'MailExtract::Line' do
     line('On Tue, 2011-03-01 at 18:02 +0530, somebody wrote:').subtype.should == :start
     line('On 2011-03-01 at 18:02 somebody wrote').type.should == :quote
     line('On 2011-03-01 at 18:02 somebody wrote').subtype.should == :start
+    line('Le 2011-03-01 18:02, somebody a écrit :').type.should == :quote
+    line('Le 2011-03-01 18:02, somebody a écrit :').subtype.should == :start    
     line('On some day somebody wrote').type.should == :text
   end
   
